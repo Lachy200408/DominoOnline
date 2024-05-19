@@ -1,0 +1,25 @@
+@font-face {
+	font-family: Futura;
+	src: url('/assets/fonts/FUTURA55REGULAR.woff2') format('woff2');
+}
+:root{
+	--violet: #5c4b8d;
+	--rose: #D9B8C4;
+	--blue-1: #B9E6FF;
+	--blue-2: #5C95FF;
+	--blue-3: #6DAEDB;
+	--green-1: #053225;
+	--green-2: #03130e;
+	--white: #f6f8fd;
+
+	color-scheme: light dark;
+}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Futura, sans-serif, serif;
+}
+html, body, body>main{
+	min-height: 100vh;
+}

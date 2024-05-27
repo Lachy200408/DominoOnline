@@ -1,31 +1,31 @@
-<style>
-	body>main{
-		display: grid;
-		place-items: center;
+	main{
 		max-width: 100vw;
 		max-height: 100vh;
 		overflow: hidden;
 		position: relative;
 	}
-	body>main.light{
+	main.light{
 		background-color: var(--white);
 		color: var(--green-1);
 	}
-	body>main.dark{
+	main.dark{
 		background-color: var(--green-2);
 		color: var(--rose);
 	}
-	body>main.light>button{
-		border: 2px solid var(--violet);
-	}
-	body>main.dark>button{
-		border: 2px solid var(--blue-3);
-	}
+
+
+
+	/** Bolas de fondo */
+
+
+
 	picture>.ball{
-		width: min(500px, 60vw);
+		width: min(500px, 40vw);
 		aspect-ratio: 1 / 1;
 		border-radius: 50%;
 		position: absolute;
+		filter: blur(150px);
+		opacity: .7;
 	}
 	.ball:nth-child(1){
 		top: 0;
@@ -33,8 +33,6 @@
 		transform: translate(-40%, -40%);
 		background-color: var(--violet);
 		box-shadow: 0 0 150px var(--violet);
-		filter: blur(150px);
-		opacity: .7;
 	}
 	.ball:nth-child(2){
 		top: 0;
@@ -42,8 +40,6 @@
 		transform: translate(48%, -48%);
 		background-color: var(--rose);
 		box-shadow: 0 0 150px var(--rose);
-		filter: blur(150px);
-		opacity: .7;
 	}
 	.ball:nth-child(3){
 		bottom: 0;
@@ -51,8 +47,6 @@
 		transform: translate(50%, 50%);
 		background-color: var(--blue-1);
 		box-shadow: 0 0 150px var(--blue-1);
-		filter: blur(150px);
-		opacity: .7;
 	}
 	.ball:nth-child(4){
 		bottom: 0;
@@ -60,13 +54,43 @@
 		transform: translate(-46%, 46%);
 		background-color: var(--blue-2);
 		box-shadow: 0 0 150px var(--blue-2);
-		filter: blur(150px);
-		opacity: .7;
+	}
+
+
+
+	/** Header */
+
+
+
+	header{
+		width: 100%;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 16px;
 	}
 	header>img{
+		width: 25%;
+	}
+	header>img.inicio{
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		width: min(1152px, 96vw);
 	}
-	main>button{
+	header>img.toHeader{
+		animation: toHeader .4s linear .1s backwards;
+	}
+
+
+
+	/** Botones */
+
+
+
+	.start, .theme{
 		width: min(320px, 60vw);
 		padding: 16px min(64px, 5vw);
 		border-radius: min(32px, 5vw);
@@ -74,7 +98,7 @@
 		font-size: calc(64px - calc(1920px - 100vw) / 64);
 		color: inherit;
 	}
-	main>button:last-child{
+	.theme{
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -83,8 +107,14 @@
 		aspect-ratio: 1 / 1;
 		padding: 0;
 		border-radius: min(8px, 2vw);
-		background-size: 32px 32px;
-		background-position: center;
+		background-size: 28px 28px !important;
+		background-position: center !important;
+	}
+	main.light :where(.start, .theme){
+		border: 2px solid var(--violet);
+	}
+	main.dark :where(.start, .theme){
+		border: 2px solid var(--blue-3);
 	}
 	button.light{
 		background: url('/assets/images/light.svg') no-repeat;
@@ -92,28 +122,41 @@
 	button.dark{
 		background: url('/assets/images/dark.svg') no-repeat;
 	}
-</style>
+	button.start{
+		position: absolute;
+		top: 90%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		overflow: hidden;
+		transition: background-color .3s linear 0s;
+	}
+	button.start:hover{
+		background-color: var(--blue-o-2);
+	}
+	button.disabled{
+		animation: fadeOut .4s linear .2s;
+	}
 
-<picture>
-	<div class="ball"></div>
-	<div class="ball"></div>
-	<div class="ball"></div>
-	<div class="ball"></div>
-</picture>
 
-<header>
-	<img
-		src="/assets/images/branding.svg"
-		alt="Domino Online"
-	/>
-</header>
 
-<button>Start</button>
-<button class="light" onclick="
-	(function(){
-		const btn = document.querySelector('main>button:last-child')
-		btn.className = (btn.className === 'light')? 'dark' : 'light'
-		document.body.querySelector('main').className = btn.className
-		document.body.querySelector('main>header>img').src = (btn.className === 'light')? '/assets/images/branding.svg' : '/assets/images/branding-dark.svg'
-	})()
-"></button>
+	/** Animaciones */
+
+
+
+	@keyframes fadeOut {
+		95%{
+			opacity: 0;
+		}
+		100%{
+			display: none;
+		}
+	}
+
+	@keyframes toHeader {
+		to{
+			top: 0;
+			left: 0;
+			width: min(128px, 25%);
+			transform: translate(0, 0);
+		}
+	}

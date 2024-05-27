@@ -1,8 +1,7 @@
-import { MainMenu } from "./mainMenu/mainMenu.js"
+import { MainMenu } from "../components/mainMenu/mainMenu.js"
 
 window.onload = function () {
-	MainMenu.loadMenu()
-	MainMenu.getMenu(html => {
+	MainMenu.init(html => {
 		document.body.append(html)
 	})
 }

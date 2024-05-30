@@ -72,6 +72,7 @@
 	}
 	header>img{
 		width: 25%;
+		z-index: 1000;
 	}
 	header>img.inicio{
 		position: absolute;

@@ -15,6 +15,7 @@ function StartCards(cdn = "", index = 0)
         
         StartCards(cdn + i, index++)
     }
+        
 }
 
 function RandomNumbersGenerate(){

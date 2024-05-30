@@ -4,5 +4,4 @@ class Player{
         this.fichas = fichas;
     }    
 }
-
 export { Player }

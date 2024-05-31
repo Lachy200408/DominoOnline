@@ -1,5 +1,5 @@
-import { Player } from './player.js'
-import { Card } from './card.js'
+import { Player } from './objects/player.js'
+import { Card } from './objects/card.js'
 
 function StartCards(cdn = "", index = 0)
 {

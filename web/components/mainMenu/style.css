@@ -71,7 +71,8 @@
 		padding: 8px 16px;
 	}
 	header>img{
-		width: 25%;
+		width: 15%;
+		z-index: 1000;
 	}
 	header>img.inicio{
 		position: absolute;
@@ -156,7 +157,7 @@
 		to{
 			top: 0;
 			left: 0;
-			width: min(128px, 25%);
+			width: 15%;
 			transform: translate(0, 0);
 		}
 	}

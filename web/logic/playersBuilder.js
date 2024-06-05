@@ -1,8 +1,8 @@
-import { Card } from './objects/card.js'
-
+/* import { Card } from './objects/card.js'*/
 export class PlayersBuilder{
 
-    static StartCards(cards,cdn = "", index = 0)
+		//* Esto no haria falta con la clase Cards
+    /* static StartCards(cards,cdn = "", index = 0)
     {
         if(cdn.length === 2){
             cards.push(new Card(cdn[0], cdn[1]))
@@ -10,22 +10,20 @@ export class PlayersBuilder{
         }
         
         for(let i = index; i <= 9; i++){
-            
             this.StartCards(cards,cdn + i, index++)
         }
         
-    }
+    } */
     
     static RandomNumbersGenerate(){
-        let numeros = [];
-        while(numeros.length < 40){
-            let numero = Math.floor(Math.random()*55)
-            
-            if(numeros.indexOf(numero) === -1) numeros.push(numero)
-                
-            }
-            return numeros
-        }
+			let numeros = [];
+			while(numeros.length < 40){
+				let numero = Math.floor(Math.random()*55)
+				
+				if(numeros.indexOf(numero) === -1) numeros.push(numero)
+			}
+			return numeros
+    }
         
     static CardsForPlayers(cards_player1,cards_player2,cards_player3,cards_player4,random_list,cards){
             

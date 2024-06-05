@@ -2,18 +2,22 @@ import { Player } from "./objects/player.js"
 import { Table } from "./objects/table.js"
 import { PlayersBuilder } from "./playersBuilder.js"
 
-let cards = []
+//* Las nuevas cards
+import { ArrayCards } from "./objects/card.js"
+
+const Cards = ArrayCards.init()
 
 let random_list = PlayersBuilder.RandomNumbersGenerate()
 
-PlayersBuilder.StartCards(cards)
+//* Esto no es necesario porque al iniciar ArrayCards ya tenemos todas las cards
+/* PlayersBuilder.StartCards(cards) */
 
 let cards_player1 = []
 let cards_player2 = []
 let cards_player3 = []
 let cards_player4 = []
 
-PlayersBuilder.CardsForPlayers(cards_player1,cards_player2,cards_player3,cards_player4,random_list,cards)
+PlayersBuilder.CardsForPlayers(cards_player1, cards_player2, cards_player3, cards_player4, random_list, Cards.list)
 
 let cards_players = []
 
@@ -41,7 +45,25 @@ let table = new Table(null)
 
 
 //despues sigo me voy a jugar voly
+/*
+* Brother instala la extension "Better Comments"
+* pa que los comentarios tengan colorcito
+* e identificarlos mejor.
+* Aparte de comentar mas 🤣🤣
 
+* Usa tests para probar y pa yo saber cual es el
+* objetivo de las funciones.
+* Vas al package.json y, donde dice script, agregas
+* el que hagas con el nombre que quieras, luego escribes
+* node --run (nombre_de_tu_script)
+
+* import { test } from 'node:test' => Los test
+* import assert from 'node:assert' => Funciones que validan los tests
+* 
+* test('Nombre de tu test', () => {
+* 	assert.equal(0, 0, 'Mensaje en caso de fallo')
+* })
+*/
 
 
 

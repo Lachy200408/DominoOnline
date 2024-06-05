@@ -3,11 +3,12 @@ import { Listeners } from "./listeners.js"
 export class MainMenu {
 	static html = document.createElement('main')
 
-	static async init () {
-		await this.loadMenu()
+	static init () {
+		this.loadMenu()
 	}
 
 	static async loadMenu () {
+		//* Insertar el html
 		await fetch('/components/mainMenu/mainMenu.html')
 					.then(res => res.text())
 					.then(data => {
@@ -18,6 +19,7 @@ export class MainMenu {
 						Listeners.set()
 					})
 
+		//* Insertar el css
 		await fetch('/components/mainMenu/styles/style.css')
 					.then(res => res.text())
 					.then(css => {

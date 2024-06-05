@@ -1,5 +1,5 @@
 export class Handlers {
-	static toggleTheme (event) {
+	static toggleTheme () {
 		const main = document.body.querySelector('main'),
 					isLight = main.classList.contains('light')
 

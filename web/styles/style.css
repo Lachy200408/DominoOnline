@@ -1,6 +1,10 @@
 @font-face {
-	font-family: Futura;
-	src: url('/assets/fonts/FUTURA55REGULAR.woff2') format('woff2');
+	font-family: Inter-R;
+	src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
+}
+@font-face {
+	font-family: Inter-M;
+	src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
 }
 :root{
 	--violet: #5c4b8d;
@@ -22,8 +26,11 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: Futura, sans-serif, serif;
+	font-family: Inter-R, sans-serif, serif;
 }
 html, body, body>main{
 	min-height: 100vh;
+}
+h1, h2, h3{
+	font-family: Inter-M, sans-serif, serif;
 }

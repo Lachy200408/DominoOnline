@@ -1,3 +1,3 @@
-import { Core } from "/components/core/core.js"
+import { Core } from "/components/controller/core.js"
 
 window.addEventListener('DOMContentLoaded', Core.entry, false)

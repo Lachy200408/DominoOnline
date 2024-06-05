@@ -151,7 +151,7 @@ main.dark .theme{
 .cuerpo{
 	flex-grow: 1;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: stretch;
 	padding-block: 8px;
 }
@@ -163,7 +163,7 @@ main.dark .theme{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: min(192px, 35%);
+	width: min(288px, 48%);
 	gap: 16px;
 	overflow: hidden;
 }
@@ -189,4 +189,37 @@ main.light .aside-art h1{
 }
 main.dark .aside-art h1{
 	color: var(--white);
+}
+.cuerpo .centro{
+	flex-grow: .9;
+	display: grid;
+	place-items: center;
+	overflow: visible;
+}
+.centro .imago img{
+	opacity: 0;
+	animation: fadeIn .4s ease-out .2s 1 normal forwards;
+}
+main.light .cuerpo .imago img:last-child{
+	display: none;
+}
+main.dark .cuerpo .imago img:first-child{
+	display: none;
+}
+@media only screen and (max-width: 600px) {
+	.centro .imago img {
+		display: none !important;
+	}
+}
+@keyframes fadeIn {
+	0% {
+		translate: 0 -16px;
+	}
+	80% {
+		opacity: .8;
+		translate: 0 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

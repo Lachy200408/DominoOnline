@@ -1,5 +1,3 @@
-import { MainMenu } from "../components/mainMenu/mainMenu.js"
+import { Core } from "/components/core/core.js"
 
-window.onload = function () {
-	MainMenu.init(html => document.body.append(html))
-}
+window.addEventListener('DOMContentLoaded', Core.entry, false)

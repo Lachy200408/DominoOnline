@@ -9,6 +9,7 @@ A fun online game of Dominoes.
 - Abrir la carpeta web desde la consola
 - Escribir el siguiente comando: python -m http.server
 - Abrir un navegador y escribir http://localhost:8000
+- En windows se escribe "./svr.cmd" en la terminal y se inicia el servidor
 
 #
 

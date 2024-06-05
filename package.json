@@ -1,0 +1,19 @@
+{
+  "name": "domino",
+  "version": "1.0.0",
+  "description": "A fun online game of Dominoes.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test-1": "node ./web/tests/randNumGenerate.test.js",
+    "test-2": "node ./web/tests/startCards.test.js",
+    "test-3": "node ./web/tests/arrayCards.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.19.2",
+    "socket.io": "4.7.5"
+  }
+}

@@ -1,4 +1,5 @@
 import { MenuCore } from "/components/mainMenu/scripts/mainMenu.js"
+import { ModalCore } from "../modal/controller/modal.js"
 
 export class Core {
 	static entry () {
@@ -14,29 +15,30 @@ class Handlers {
 
 	static get (id) {
 		const funcs = {
-			"single": this.singlePlayer,
-			"multiplayer": this.multiPlayer,
-			"signIn": this.signIn,
-			"signUp": this.signUp
+			"single": this.MenuFn.singlePlayer,
+			"multiplayer": this.MenuFn.multiPlayer,
+			"signIn": this.MenuFn.signIn,
+			"signUp": this.MenuFn.signUp
 		}
 
 		return funcs[id]
 	}
 
-	static signUp (event) {
-		console.log(event.target.id);
-	}
+	static MenuFn = {
+		signUp: function () {
+			ModalCore.display('signUp')
+		},
 
-	static signIn (event) {
-		console.log(event.target.id);
-	}
+		signIn: function (event) {
+			console.log(event.target.id);
+		},
 
-	static singlePlayer (event) {
-		console.log(event.target.id);
-	}
+		singlePlayer: function (event) {
+			console.log(event.target.id);
+		},
 
-	static multiPlayer (event) {
-		console.log(event.target.id);
+		multiPlayer: function (event) {
+			console.log(event.target.id);
+		}
 	}
-
 }

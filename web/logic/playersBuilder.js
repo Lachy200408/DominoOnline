@@ -1,18 +1,36 @@
-/* import { Card } from './objects/card.js' */
+import { Game } from "./game.js"
+import { Player } from "./objects/player.js"
 export class PlayersBuilder {
-  //* Esto no haria falta con la clase Cards
-  /* static StartCards(cards,cdn = "", index = 0)
-    {
-        if(cdn.length === 2){
-            cards.push(new Card(cdn[0], cdn[1]))
-            return
-        }
+  
+  constructor(){
 
-        for(let i = index; i <= 9; i++){
-            this.StartCards(cards,cdn + i, index++)
-        }
+    const Cards = Game.initCards()
+    
+    this.players = []
+    
+    const randomList = PlayersBuilder.RandomNumbersGenerate()
 
-    } */
+    let cardsList1 = []
+    let cardsList2 = []
+    let cardsList3 = []
+    let cardsList4 = []
+    
+    for(let i = 0; i < 40;i++){
+      
+      if (i < 10) { cardsList1.push(Cards[randomList[i]]) } 
+      else if (i < 20) { cardsList2.push(Cards[randomList[i]]) } 
+      else if (i < 30) { cardsList3.push(Cards[randomList[i]]) } 
+      else if (i < 40) {cardsList4.push(Cards[randomList[i]]) }
+
+    }
+
+    this.players.push(new Player(cardsList1))
+    this.players.push(new Player(cardsList2))
+    this.players.push(new Player(cardsList3))
+    this.players.push(new Player(cardsList4))
+    
+      
+  }
 
   static RandomNumbersGenerate () {
     const numeros = []
@@ -22,11 +40,5 @@ export class PlayersBuilder {
       if (numeros.indexOf(numero) === -1) numeros.push(numero)
     }
     return numeros
-  }
-
-  static CardsForPlayers (cards_player1, cards_player2, cards_player3, cards_player4, random_list, cards) {
-    for (let i = 0; i < 40; i++) {
-      if (i < 10) { cards_player1.push(cards[random_list[i]]) } else if (i < 20) { cards_player2.push(cards[random_list[i]]) } else if (i < 30) { cards_player3.push(cards[random_list[i]]) } else if (i < 40) { cards_player4.push(cards[random_list[i]]) }
-    }
   }
 }

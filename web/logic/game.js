@@ -1,11 +1,26 @@
+import { CardsBuilder } from './cardsBuilder.js'
+import { PlayersBuilder } from './playersBuilder.js'
+
 export class Game{
 
     static Start(){
 
+        
     }
     static Over(){
 
     } 
+    static initCards () {
+        let cards = new CardsBuilder()
+    
+        return cards.list
+    }
+
+    static initPlayers(){
+        let playerBuilder = new PlayersBuilder()
+
+        return playerBuilder.players
+    }
     
     static PlayerCanPlay(actual_player){
         for(let card of actual_player.cards){

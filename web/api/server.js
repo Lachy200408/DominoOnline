@@ -1,22 +1,17 @@
 import express from 'express'
-import cors from 'cors'
 import { createServer } from 'node:http'
+import { middlewares } from './middlewares/middlewares.js'
 import { webSocketConnection } from './websocket/server.js'
+import { apiRestConnection } from './rest/server.js'
 
 const app = express()
 const server = createServer(app)
+
+middlewares(app)
+
+//* Server connections 
 webSocketConnection(server)
-
-app.use(cors())
-app.use(express.json())
-
-app.get('/', (req, res) => {
-	res.send('ok')
-})
-
-app.post('/newUser', (req, res) => {
-	res.send('ok')
-})
+apiRestConnection(app)
 
 const PORT = process.env.PORT ?? 3080
 server.listen(PORT, () => {

@@ -40,11 +40,9 @@ class Handlers {
 			ModalCore.display('signUp')
 		},
 
-		signIn: function (event) {
-			ModalCore.display('alert', {
-				type: 'error',
-				text: 'Feature not available'
-			})
+		signIn: function () {
+			//! Pendiente
+			ModalCore.display('signIn')
 		},
 
 		singlePlayer: function (event) {
@@ -69,12 +67,15 @@ class Handlers {
 				password: event.info.password
 			})
 
-			if (result === 'ok') {
-				ModalCore.newMessage('signUp', {
-					type: 'ok',
-					text: `The user ${event.info.username} has been successfully registered.`
-				})
-			}
+			const text = (result === 'ok')? 		`The user ${event.info.username} has been successfully registered.` :
+									 (result === 'exists')? `The user ${event.info.username} already exists.` :
+									 												`An unspected error was ocurred. Check your internet connection.`,
+						type = (result === 'ok')? 'ok' : 'error' 
+			
+			return ModalCore.newMessage('signUp', {
+				type: type,
+				text: text
+			})
 		}
 	}
 }

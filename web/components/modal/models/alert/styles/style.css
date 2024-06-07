@@ -1,5 +1,6 @@
 .alert{
 	font-size: calc(.8em - calc(778px - 100vw) / 128);
+	text-align: center;
 	width: min(512px, 90vw);
   height: 128px;
 	margin-block: 64px;

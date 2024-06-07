@@ -15,10 +15,11 @@
   "dependencies": {
     "cors": "2.8.5",
     "express": "4.19.2",
+    "mysql2": "3.10.0",
     "socket.io": "4.7.5"
   },
   "devDependencies": {
-    "standard": "^17.1.0"
+    "standard": "17.1.0"
   },
   "eslintConfig": {
     "extends": "standard",

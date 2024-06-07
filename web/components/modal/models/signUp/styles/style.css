@@ -87,6 +87,7 @@
 	display: grid;
 	place-items: center;
 	flex-grow: 1;
+	text-align: center;
 }
 .response.ok{
 	color: var(--blue-2);

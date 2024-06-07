@@ -1,8 +1,18 @@
 export const getActiveServer = async (array) => {
 	for (const url of array) {
-		const status = await fetch(url).then(res => res.status).then(status => status)
+		let status = 0
 
-		if (status) return url
-		return array[0]
+		try{
+			await fetch(url + '/check')
+						.then(res => res.status)
+						.then(_status => status = _status)
+		}
+		catch{
+			status = 0
+		}
+		finally{
+			if (status != 0) return url
+			return array[0]
+		}
 	}
 }

@@ -1,0 +1,18 @@
+.alert{
+	font-size: calc(.8em - calc(778px - 100vw) / 128);
+	width: min(512px, 90vw);
+  height: 128px;
+	margin-block: 64px;
+	display: grid;
+	place-items: center;
+}
+.alert.ok{
+	color: var(--blue-2);
+	background-color: var(--blue-o-2);
+	border-block: 2px solid var(--blue-3);
+}
+.alert.error{
+	color: brown;
+	background-color: rgba(165, 42, 42, 0.521);
+	border-block: 2px solid brown;
+}

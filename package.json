@@ -13,14 +13,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "2.8.5",
     "express": "4.19.2",
     "socket.io": "4.7.5"
   },
   "devDependencies": {
     "standard": "^17.1.0"
   },
-	"eslintConfig": {
-		"extends": "standard",
-		"eslintDisable": "camelcase"
-	}
+  "eslintConfig": {
+    "extends": "standard",
+    "eslintDisable": "camelcase"
+  }
 }

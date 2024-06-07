@@ -1,0 +1,100 @@
+#signUp-form{
+	width: min(778px,90vw);
+	height: 75vh;
+	padding: 32px min(16px, 2vw);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+#signUp-form fieldset{
+	border: none;
+	width: 100%;
+}
+#signUp-form fieldset *{
+	color: var(--green-2);
+}
+#signUp-form fieldset:first-child{
+	flex-grow: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-content: flex-start;
+}
+#signUp-form fieldset:first-child legend{
+	display: block;
+	margin-inline: auto;
+	font-size: calc(1em - calc(778px - 100vw) / 128);
+}
+#signUp-form fieldset:first-child label{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	gap: 16px;
+	font-size: calc(1em - calc(778px - 100vw) / 128);
+}
+#signUp-form fieldset:first-child label input{
+	width: min(512px, 75%);
+	font-size: .8em;
+	background-color: transparent;
+	border: none;
+	border: 2px solid var(--violet);
+	border-radius: 32px;
+	padding: 8px min(16px, 4vw);
+	text-indent: 2px;
+}
+#signUp-form fieldset:first-child label input:focus{
+	outline: none;
+	box-shadow: 0 0 8px 4px var(--blue-2);
+}
+#signUp-form fieldset:first-child label input:autofill{
+	background-color: transparent;
+}
+#signUp-form fieldset:first-child label input:-webkit-autofill{
+	background-color: transparent;
+}
+#signUp-form fieldset:last-child{
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 32px;
+}
+#signUp-form fieldset:last-child button{
+	padding: 8px 16px;
+	border-radius: 8px;
+	border: none;
+	font-size:  calc(.9em - calc(778px - 100vw) / 128);
+}
+#signUp-form fieldset:last-child button:first-child{
+	background-color: transparent;
+	color: brown;
+}
+#signUp-form fieldset:last-child button:first-child:hover{
+	color: var(--violet);
+}
+#signUp-form fieldset:last-child button:last-child{
+	background-color: var(--blue-2);
+	color: var(--white);
+}
+#signUp-form fieldset:last-child button:last-child:hover{
+	background-color: var(--violet);
+}
+#signUp-form .response{
+	font-size: calc(.8em - calc(778px - 100vw) / 128);
+	width: 100%;
+	display: grid;
+	place-items: center;
+	flex-grow: 1;
+}
+.response.ok{
+	color: var(--blue-2);
+	background-color: var(--blue-o-2);
+	border-block: 2px solid var(--blue-3);
+}
+.response.error{
+	color: brown;
+	background-color: rgba(165, 42, 42, 0.521);
+	border-block: 2px solid brown;
+}

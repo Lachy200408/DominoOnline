@@ -18,8 +18,8 @@
 	--green-1: #053225;
 	--green-2: #03130e;
 	--white: #f6f8fd;
+	--black-o: #22222255;
 
-	color-scheme: light dark;
 	font-size: 24px;
 }
 *{
@@ -27,6 +27,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Inter-R, sans-serif, serif;
+	text-shadow: 0 0 2px var(--black-o);
 }
 html, body, body>main{
 	min-height: 100vh;

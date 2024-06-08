@@ -5,7 +5,7 @@ import { ConnectionCore } from "/components/connection/controller/connection.js"
 import { MenuCore } from "/components/mainMenu/scripts/mainMenu.js"
 import { ModalCore } from "/components/modal/controller/modal.js"
 
-//* Importaciones de utilitie functions
+//* Importaciones de utility functions
 
 import { getResponseMessage } from "./util/responseMessage.js"
 

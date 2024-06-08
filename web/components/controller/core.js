@@ -1,8 +1,13 @@
 //* Importaciones de modulos
 
+import { UserCore } from "/components/user/controller/user.js"
 import { ConnectionCore } from "/components/connection/controller/connection.js"
 import { MenuCore } from "/components/mainMenu/scripts/mainMenu.js"
 import { ModalCore } from "/components/modal/controller/modal.js"
+
+//* Importaciones de utilitie functions
+
+import { getResponseMessage } from "./util/responseMessage.js"
 
 //* Nucleo principal
 
@@ -62,35 +67,21 @@ class Handlers {
 
 	static EventFn = {
 		newUser: async function (event) {
-			const result = await ConnectionCore.post('newUser', {
-				username: event.info.username,
-				password: event.info.password
-			})
-
-			const text = (result === 'ok')? 		`The user ${event.info.username} has been successfully registered.` :
-									 (result === 'exists')? `The user ${event.info.username} already exists.` :
-									 												`An unspected error was ocurred. Check your internet connection.`,
-						type = (result === 'ok')? 'ok' : 'error' 
+			const result = await ConnectionCore.post('newUser', event.info)
+			const { type, text } = getResponseMessage(result, event.info.username, 'signUp')
 			
-			return ModalCore.newMessage('signUp', {
-				type: type,
-				text: text
-			})
+			ModalCore.newMessage('signUp', { type: type, text: text	})
+
+			if (type === 'ok') UserCore.login(result)
 		},
 
 		login: async function (event) {
 			const result = await ConnectionCore.get('login', event.info)
+			const { type, text } = getResponseMessage(result, event.info.username, 'signIn')
 
-			const text = (result.username)? 										`The user ${event.info.username} has been successfully loged in.` :
-									 (result.message.includes('password'))? `The password is incorrect.` :
-									 (result.message.includes('username'))? `The user ${event.info.username} does not exists.` :
-									 																				`An unspected error was ocurred. Check your internet connection.`,
-						type = (result.username)? 'ok' : 'error'
+			ModalCore.newMessage('signIn', { type: type, text: text })
 
-			return ModalCore.newMessage('signIn', {
-				type: type,
-				text: text
-			})
+			if (type === 'ok') UserCore.login(result)
 		}
 	}
 }

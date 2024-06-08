@@ -17,8 +17,8 @@ class Connection {
 		getActiveServer(SERVER_URL).then(url => this.activeServer = url)
 	}
 
-	async post (concept, obj) {
-		if (concept === 'newUser') return await SignUpConnection.post(this.activeServer, obj)
+	async post (concept, info) {
+		if (concept === 'newUser') return await SignUpConnection.post(this.activeServer, info)
 	}
 
 	async get (concept, info) {

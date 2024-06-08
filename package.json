@@ -5,6 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+		"api": "node --watch ./web/api/server.js",
+
     "test-1": "node ./web/tests/randNumGenerate.test.js",
     "test-2": "node ./web/tests/startCards.test.js",
     "test-3": "node ./web/tests/arrayCards.test.js"

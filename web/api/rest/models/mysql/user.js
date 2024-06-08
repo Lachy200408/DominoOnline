@@ -11,24 +11,49 @@ const config = {
 const connection = await mysql.createConnection(config)
 
 export class UserModel {
-	static async signUp ({ username, password }) {
-		try{
+	static async exists ({ username }) {
+		try {
 			//* Ver si existe el usuario
 			const [result] = await connection.query(
 				'SELECT COUNT(*) AS existe FROM users WHERE username = ?;',
 				[username]
 			)
-			if (result[0].existe !== 0) return 'exists'
+			
+			return result[0].existe !== 0
+		}
+		catch (e) {
+			console.error(e)
+			process.exit(1)
+		}
+	}
 
-			//* Si no existe, ponerlo en la tabla
+	static async insert ({ username, password }) {
+		try{
 			const [userObj] = await connection.query(
 				'INSERT INTO users (username, password) VALUES (?, ?);',
 				[username, password]
 			)
-			if (userObj.affectedRows === 1) return 'ok'
+
+			return userObj.affectedRows === 1
 		}
-		catch (err){
-			console.log(err)
+		catch (e){
+			console.error(e)
+			process.exit(1)
+		}
+	}
+
+	static async select ({ username, password }) {
+		try{
+			const [userObj] = await connection.query(
+				'SELECT username, password FROM users WHERE username=? AND password=?;',
+				[username, password]
+			)
+
+			return userObj[0]
+		}
+		catch (e){
+			console.error(e)
+			process.exit(1)
 		}
 	}
 }

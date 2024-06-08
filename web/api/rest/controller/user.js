@@ -2,12 +2,24 @@ import { UserModel } from "../models/mysql/user.js"
 
 export class UserController {
 	static async signUp (req, res) {
-		const username = req.body['username'],
-					password = req.body['password']
+		const { username, password } = req.body
 
-		const result = await UserModel.signUp({ username, password })
+		if (await UserModel.exists({ username })) return res.status(404).send('exists')
+		if (await UserModel.insert({ username, password })) return res.send('ok')
 
-		if (result) return res.send(result)
 		return res.status(404).send()
+	}
+
+	static async signIn (req, res) {
+		const { username, password } = req.query
+
+		if (await UserModel.exists({ username })) {
+			const result = await UserModel.select({ username, password })
+			
+			if (result) return res.send(result)
+			return res.status(404).json({ message: 'Incorrect password.' })
+		}
+
+		return res.status(404).json({ message: 'Incorrect username.' })
 	}
 }

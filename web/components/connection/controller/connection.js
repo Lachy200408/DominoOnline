@@ -1,4 +1,10 @@
+//* Models
+
+import { SignInConnection } from "../models/signIn/model.js"
 import { SignUpConnection } from "../models/signUp/model.js"
+
+//* Utility function
+
 import { getActiveServer } from '../util/activeServer.js'
 
 class Connection {
@@ -13,6 +19,10 @@ class Connection {
 
 	async post (concept, obj) {
 		if (concept === 'newUser') return await SignUpConnection.post(this.activeServer, obj)
+	}
+
+	async get (concept, info) {
+		if (concept === 'login') return await SignInConnection.get(this.activeServer, info)
 	}
 }
 

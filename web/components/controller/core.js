@@ -29,7 +29,8 @@ class Handlers {
 			"signIn": this.MenuFn.signIn,
 			"signUp": this.MenuFn.signUp,
 
-			"newUser": this.EventFn.newUser
+			"newUser": this.EventFn.newUser,
+			"login": this.EventFn.login,
 		}
 
 		return funcs[id]
@@ -41,7 +42,6 @@ class Handlers {
 		},
 
 		signIn: function () {
-			//! Pendiente
 			ModalCore.display('signIn')
 		},
 
@@ -76,6 +76,21 @@ class Handlers {
 				type: type,
 				text: text
 			})
+		},
+
+		login: async function (event) {
+			const result = await ConnectionCore.get('login', event.info)
+
+			const text = (result.username)? 										`The user ${event.info.username} has been successfully loged in.` :
+									 (result.message.includes('password'))? `The password is incorrect.` :
+									 (result.message.includes('username'))? `The user ${event.info.username} does not exists.` :
+									 																				`An unspected error was ocurred. Check your internet connection.`,
+						type = (result.username)? 'ok' : 'error'
+
+			return ModalCore.newMessage('signIn', {
+				type: type,
+				text: text
+			})
 		}
 	}
 }
@@ -84,5 +99,6 @@ class Handlers {
 class Listeners {
 	static set () {
 		window.addEventListener('newUser', Core.getHandler('newUser'), false)
+		window.addEventListener('login', Core.getHandler('login', false))
 	}
 }

@@ -1,5 +1,6 @@
 import { CloseModal } from "./scripts/closeModal.js"
 import { SUpModel } from "../models/signUp/scripts/model.js"
+import { SInModel } from "../models/signIn/scripts/model.js"
 import { AlertModel } from "../models/alert/scripts/model.js"
 
 class Modal {
@@ -20,11 +21,13 @@ class Modal {
 
 	display (model, message={}) {
 		if (model === 'signUp') return SUpModel.init(this.html, Modal.setListenerCloseModal)
+		if (model === 'signIn') return SInModel.init(this.html, Modal.setListenerCloseModal)
 		if (model === 'alert') return AlertModel.init(this.html, Modal.setListenerCloseModal, message)
 	}
 
 	newMessage (model, message={}) {
 		if (model === 'signUp') return SUpModel.response(message)
+		if (model === 'signIn') return SInModel.response(message)
 	}
 
 	static setListenerCloseModal () {

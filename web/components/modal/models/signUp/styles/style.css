@@ -1,6 +1,6 @@
 #signUp-form{
 	width: min(778px,90vw);
-	height: 75vh;
+	min-height: 75vh;
 	padding: 32px min(16px, 2vw);
 	display: flex;
 	flex-direction: column;
@@ -19,7 +19,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	align-content: flex-start;
+	align-items: center;
 }
 #signUp-form fieldset:first-child legend{
 	display: block;
@@ -32,7 +32,12 @@
 	justify-content: space-around;
 	flex-wrap: wrap;
 	gap: 16px;
+	margin-top: 16px;
 	font-size: calc(1em - calc(778px - 100vw) / 128);
+}
+#signUp-form fieldset:first-child label:not(:last-child){
+	width: max-content;
+	border-radius: 50%;
 }
 #signUp-form fieldset:first-child label input{
 	width: min(512px, 75%);
@@ -53,6 +58,30 @@
 }
 #signUp-form fieldset:first-child label input:-webkit-autofill{
 	background-color: transparent;
+}
+#signUp-form #avatar{
+	max-width: 256px;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	position: relative;
+	color: transparent;
+	text-shadow: none;
+}
+#signUp-form #avatar.completed::file-selector-button{
+	display: none;
+}
+#signUp-form #avatar::file-selector-button{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 50%;
+	background: url('/assets/images/default-avatar.svg') no-repeat;
+	background-position: center;
+	background-size: 50%;
+	color: transparent;
 }
 #signUp-form fieldset:last-child{
 	flex-grow: 1;

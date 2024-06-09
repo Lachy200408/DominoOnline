@@ -9,7 +9,6 @@ export const getResponseMessage = (result, username, concept) => {
 	}
 	else {
 		text = (result.username)? 											`The user ${username} has been successfully loged in.` :
-					 (result.message.includes('password'))? 	`The password is incorrect.` :
 					 (result.message.includes('username'))? 	`The user ${username} does not exists.` :
 																										`An unspected error was ocurred. Check your internet connection.`
 	}

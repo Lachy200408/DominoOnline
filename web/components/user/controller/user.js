@@ -1,6 +1,10 @@
 class User {
-	login (data) {
+	constructor () {
+		this.username = ''
+	}
 
+	login (data) {
+		this.username = data.username
 	}
 }
 

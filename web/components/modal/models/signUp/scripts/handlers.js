@@ -20,7 +20,7 @@ export class Handlers {
 		event.preventDefault()
 	
 		const form = document.querySelector('#signUp-form'),
-					username = form.querySelector('#username').value
+					username = form.querySelector('#username').value,
 					avatar = form.querySelector('#avatar').files[0]
 
 		//* Tomar el array binario de la foto
@@ -30,7 +30,12 @@ export class Handlers {
 
 		//* Disparar el evento
 		const newUser = new Event('newUser', {bubbles: false})
-		newUser.info = { username, value }
+		newUser.info = {
+			username,
+			array: value,
+			type: avatar.type.slice(avatar.type.indexOf('/')+1)
+		}
+
 		dispatchEvent(newUser)
 
 		//* Quitar el mensaje de respuesta

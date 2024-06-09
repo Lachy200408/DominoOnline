@@ -1,7 +1,8 @@
 import cors from 'cors'
-import { json } from "express"
+import { json, text } from "express"
 
 export const middlewares = function (app) {
-	app.use(cors())
+	app.use(cors({methods: '*'}))
 	app.use(json())
+	app.use(text())
 }

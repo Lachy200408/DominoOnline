@@ -4,4 +4,5 @@ import { UserController } from "../controller/user.js"
 export const UserRouter = new Router()
 
 UserRouter.post('/new', UserController.signUp)
+UserRouter.post('/avatar', UserController.postAvatar)
 UserRouter.get('/', UserController.signIn)

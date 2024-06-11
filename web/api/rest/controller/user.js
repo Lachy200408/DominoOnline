@@ -1,9 +1,10 @@
 import { AvatarModel } from "../util/avatar.js"
 import { UserModel } from "../models/mysql/user.js"
+import { writeFile } from 'node:fs/promises'
 
 export class UserController {
 	static async postAvatar (req, res) {
-		const { type } = req.query
+		const { avatarName } = req.query
 		const total = +req.query.total
 		const text = req.body
 
@@ -11,7 +12,9 @@ export class UserController {
 		AvatarModel.push(text)
 
 		if (AvatarModel.completed()) {
-			
+			await AvatarModel.save(avatarName, writeFile)
+			AvatarModel.reset()
+			return res.send('completed')
 		}
 		return res.send('next')
 	}

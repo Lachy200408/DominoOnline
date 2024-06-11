@@ -18,7 +18,7 @@ class Avatar {
 	}
 
 	get () {
-		return [...this.array]
+		return this.array
 	}
 
 	completed () {
@@ -28,6 +28,7 @@ class Avatar {
 	reset () {
 		this.totalEnvios = 0
 		this.current = 0
+		this.array = []
 	}
 
 	ready () {
@@ -35,7 +36,9 @@ class Avatar {
 	}
 
 	async save (nombre, writeFile) {
+		const buffer = Buffer.from(this.array)
 
+		return await writeFile(`./web/api/avatars/${nombre}`, buffer)
 	}
 }
 

@@ -9,7 +9,7 @@ class SignUpModel {
 			if (i===20) arrayPortion = array.slice(start)
 			else arrayPortion = array.slice(start, end)
 
-			await fetch(url + `/user/avatar?total=20&type=${type}`, { method: 'POST', body: arrayPortion.join(',') })
+			await fetch(url + `/user/avatar?total=20&avatarName=${username+'.'+type}`, { method: 'POST', body: arrayPortion.join(',') })
 		}
 		//! Falta catchear el error de servidor por imagenes muy grandes
 

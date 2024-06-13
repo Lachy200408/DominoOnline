@@ -6,7 +6,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	gap: 64px;
+	gap: 32px;
 }
 #signIn-form fieldset{
 	border: none;
@@ -86,6 +86,7 @@
 }
 #signIn-form .response{
 	font-size: calc(.8em - calc(778px - 100vw) / 128);
+	padding-block: 16px;
 	width: 100%;
 	display: grid;
 	place-items: center;

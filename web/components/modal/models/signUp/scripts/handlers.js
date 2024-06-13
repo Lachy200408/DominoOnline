@@ -24,15 +24,13 @@ export class Handlers {
 					avatar = form.querySelector('#avatar').files[0]
 
 		//* Tomar el array binario de la foto
-		const readableStream = avatar.stream()
-		const reader = readableStream.getReader()
-		const value = await reader.read().then(result => result.value)
+		const arrayAvatar = await avatar?.arrayBuffer()
 
 		//* Disparar el evento
 		const newUser = new Event('newUser', {bubbles: false})
 		newUser.info = {
 			username,
-			array: value,
+			arrayAvatar,
 			type: avatar.type.slice(avatar.type.indexOf('/')+1)
 		}
 

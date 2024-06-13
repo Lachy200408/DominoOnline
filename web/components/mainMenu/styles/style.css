@@ -203,7 +203,7 @@ main.dark .aside-art p.title{
 	place-items: center;
 }
 .primary .avatar{
-	width: max(140px, 86%);
+	width: min(256px, 98%);
 	aspect-ratio: 1 / 1;
 }
 .user-info .user-name{

@@ -1,32 +1,14 @@
-import { AvatarModel } from "../util/avatar.js"
 import { UserModel } from "../models/mysql/user.js"
-import { writeFile } from 'node:fs/promises'
 
 export class UserController {
-	static async postAvatar (req, res) {
-		const { avatarName } = req.query
-		const total = +req.query.total
-		const text = req.body
-
-		if (AvatarModel.ready()) AvatarModel.init(total)
-		AvatarModel.push(text)
-
-		if (AvatarModel.completed()) {
-			await AvatarModel.save(avatarName, writeFile)
-			AvatarModel.reset()
-			return res.send('completed')
-		}
-		return res.send('next')
-	}
-
 	static async signUp (req, res) {
-		const { username } = req.query
-
+		const { username, avatarName } = req.query
+		
 		if (await UserModel.exists({ username })) {
 			return res.status(404).json({ message: 'The user already exists.' })
 		}
 		
-		if (await UserModel.insert({ username, avatar })) {
+		if (await UserModel.insert({ username, avatarName })) {
 			const result = await UserModel.select({ username })
 			
 			if (result) return res.json(result)

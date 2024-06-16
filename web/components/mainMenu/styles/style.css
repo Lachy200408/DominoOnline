@@ -147,6 +147,9 @@ main.dark .theme{
 	height: 32px;
 	background-color: var(--rose);
 }
+.disabled{
+	display: none;
+}
 
 
 
@@ -202,8 +205,8 @@ main.dark .aside-art p.title{
 	display: grid;
 	place-items: center;
 }
-.primary .avatar{
-	width: min(256px, 98%);
+.primary :where(.avatar, .avatar>img){
+	width: min(208px, 98%);
 	aspect-ratio: 1 / 1;
 }
 .user-info .user-name{

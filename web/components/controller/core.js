@@ -70,18 +70,25 @@ class Handlers {
 			const result = await ConnectionCore.post('newUser', event.info)
 			const { type, text } = getResponseMessage(result, event.info.username, 'signUp')
 			
-			ModalCore.newMessage('signUp', { type: type, text: text	})
+			ModalCore.newMessage('signUp', { type, text	})
 
-			if (type === 'ok') UserCore.login(result)
+			//* Loggear al usuario cuando se registre
+			if (type === 'ok') {
+				const userToPage = UserCore.login(result, ConnectionCore.activeServer)
+				MenuCore.userLogedIn(userToPage)
+			}
 		},
 
 		login: async function (event) {
 			const result = await ConnectionCore.get('login', event.info)
 			const { type, text } = getResponseMessage(result, event.info.username, 'signIn')
 
-			ModalCore.newMessage('signIn', { type: type, text: text })
+			ModalCore.newMessage('signIn', { type, text })
 
-			if (type === 'ok') UserCore.login(result)
+			if (type === 'ok') {
+				const userToPage = UserCore.login(result, ConnectionCore.activeServer)
+				MenuCore.userLogedIn(userToPage)
+			}
 		}
 	}
 }

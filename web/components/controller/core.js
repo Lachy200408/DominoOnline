@@ -36,6 +36,7 @@ class Handlers {
 
 			"newUser": this.EventFn.newUser,
 			"login": this.EventFn.login,
+			"logOut": this.EventFn.logout
 		}
 
 		return funcs[id]
@@ -43,25 +44,40 @@ class Handlers {
 
 	static MenuFn = {
 		signUp: function () {
-			ModalCore.display('signUp')
+			ModalCore.display({ model: 'signUp' })
 		},
 
 		signIn: function () {
-			ModalCore.display('signIn')
+			ModalCore.display({ model: 'signIn' })
 		},
 
 		singlePlayer: function (event) {
-			ModalCore.display('alert', {
-				type: 'error',
-				text: 'Feature not available'
+			ModalCore.display({
+				model: 'alert',
+				message: {
+					type: 'error',
+					text: 'Feature not available'
+				}
 			})
 		},
 
 		multiPlayer: function (event) {
-			ModalCore.display('alert', {
-				type: 'error',
-				text: 'Feature not available'
-			})
+			if (UserCore.loged) {
+				//* Comenzar el juego
+				ModalCore.display({
+					model: 'multiplayer',
+					connection: ConnectionCore.webSocket()
+				})
+			}
+			else {
+				ModalCore.display({
+					model: 'alert',
+					message: {
+						type: 'error',
+						text: 'You must be signed in first.'
+					}
+				})
+			}
 		}
 	}
 
@@ -70,7 +86,10 @@ class Handlers {
 			const result = await ConnectionCore.post('newUser', event.info)
 			const { type, text } = getResponseMessage(result, event.info.username, 'signUp')
 			
-			ModalCore.newMessage('signUp', { type, text	})
+			ModalCore.newMessage({ 
+				model: 'signUp',
+				message: { type, text	}
+			})
 
 			//* Loggear al usuario cuando se registre
 			if (type === 'ok') {
@@ -83,12 +102,19 @@ class Handlers {
 			const result = await ConnectionCore.get('login', event.info)
 			const { type, text } = getResponseMessage(result, event.info.username, 'signIn')
 
-			ModalCore.newMessage('signIn', { type, text })
+			ModalCore.newMessage({ 
+				model: 'signIn',
+				message: { type, text }
+			})
 
 			if (type === 'ok') {
 				const userToPage = UserCore.login(result, ConnectionCore.activeServer)
 				MenuCore.userLogedIn(userToPage)
 			}
+		},
+
+		logout: function () {
+			UserCore.reset()
 		}
 	}
 }
@@ -97,6 +123,7 @@ class Handlers {
 class Listeners {
 	static set () {
 		window.addEventListener('newUser', Core.getHandler('newUser'), false)
-		window.addEventListener('login', Core.getHandler('login', false))
+		window.addEventListener('login', Core.getHandler('login'), false)
+		window.addEventListener('logOut', Core.getHandler('logOut'), false)
 	}
 }

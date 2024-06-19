@@ -29,10 +29,15 @@ export class UserModel {
 
 	static async insert ({ username, avatarName }) {
 		try{
-			const [userObj] = await connection.query(
-				'INSERT INTO users (username, avatar) VALUES (?,?);',
-				[username, avatarName]
-			)
+			const query = avatarName
+										?'INSERT INTO users (username, avatar) VALUES (?,?);'
+										:'INSERT INTO users (username) VALUES (?);'
+
+			const array = avatarName
+										?[username, avatarName]
+										:[username]
+
+			const [userObj] = await connection.query(query, array)
 
 			return userObj.affectedRows === 1
 		}

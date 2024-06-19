@@ -23,16 +23,24 @@ export class Handlers {
 					username = form.querySelector('#username').value,
 					avatar = form.querySelector('#avatar').files[0]
 
-		//* Tomar el array binario de la foto
-		const arrayAvatar = await avatar?.arrayBuffer()
+		let info
+		if (avatar) {
+			//* Tomar el array binario de la foto
+			const arrayAvatar = await avatar?.arrayBuffer()
+
+			info = {
+				username,
+				arrayAvatar,
+				type: avatar.type.slice(avatar.type.indexOf('/')+1)
+			}
+		}
+		else {
+			info = { username }
+		}
 
 		//* Disparar el evento
 		const newUser = new Event('newUser', {bubbles: false})
-		newUser.info = {
-			username,
-			arrayAvatar,
-			type: avatar.type.slice(avatar.type.indexOf('/')+1)
-		}
+		newUser.info = info
 
 		dispatchEvent(newUser)
 

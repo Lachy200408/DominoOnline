@@ -4,11 +4,16 @@ import { Game } from './game.js'
 let currentLeft = '1'
 let currentRight = '3'
 
+let countPass = 0;
+
 let currentCardsToPlay = []
 
 let currentTurn = 0
 
 const Players = Game.initPlayers()
+const table = new Table(null)
+
+currentTurn = Game.pareNone()
 
 while(Game.isNotOverUntilIWin()){
 
@@ -16,6 +21,8 @@ while(Game.isNotOverUntilIWin()){
     
     if(currentPlayer.canPlay(currentCardsToPlay)){// currentCardsToPlay es una lista de las fichas que el jugador puede jugar
         
+        countPass = 0;
+
         let card = currentPlayer.selectCard()
     
         if(card.left_value == actual_left && card.right_value == actual_right ||
@@ -30,12 +37,25 @@ while(Game.isNotOverUntilIWin()){
                     table.insert_on_right()
                 }
         }
-        currentPlayer.putCard(card)
+        let isOver = currentPlayer.putCard(card)
+
+        if(isOver){
+            Game.over()
+        }
+    }
+    else{
+        
+        countPass++
+        
+        if(countPass == 4){
+            Game.countPoints()
+            Game.over()
+        }
     }
     //currentCardsToPlay.Clear()
     Game.nextTurn()
 }
 
-const table = new Table(null)
+
 
 

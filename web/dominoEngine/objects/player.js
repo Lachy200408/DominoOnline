@@ -21,6 +21,7 @@ export class Player{
         else if(card.left_value == actual_right || card.right_value == actual_right){
             table.insert_on_right()
         }
+        return false
     }
     canPlay(actualCardsToPlay){
         for(let card of this.cards){          

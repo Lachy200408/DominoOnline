@@ -28,6 +28,12 @@ export class Game{
     static nextTurn(actual_turn){
             actual_turn = (actual_turn + 1) % 4
     }
+    static pareNone(){
+        return 0;
+    }
+    static countPoints(){
+
+    }
     
     
 }

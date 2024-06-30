@@ -35,3 +35,6 @@ html, body, body>main{
 h1, h2, h3{
 	font-family: Inter-M, sans-serif, serif;
 }
+body, main{
+	overflow-y: auto;
+}

@@ -1,6 +1,6 @@
 class SignInModel {
-	async get (url, { username, password}) {
-		return await fetch(url + `/user?username=${username}&password=${password}`)
+	async get (url, { username }) {
+		return await fetch(url + `/user?username=${username}`)
 								 .then(res => res.json())
 								 .then(result => result)
 								 .catch(e => null)

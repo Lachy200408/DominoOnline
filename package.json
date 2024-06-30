@@ -9,7 +9,8 @@
 
     "test-1": "node ./web/tests/randNumGenerate.test.js",
     "test-2": "node ./web/tests/startCards.test.js",
-    "test-3": "node ./web/tests/arrayCards.test.js"
+    "test-3": "node ./web/tests/arrayCards.test.js",
+    "test-4": "node ./web/tests/textToBlob.test.js"
   },
   "keywords": [],
   "author": "",

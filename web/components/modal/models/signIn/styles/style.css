@@ -1,11 +1,12 @@
 #signIn-form{
 	width: min(778px,90vw);
-	height: 75vh;
+	min-height: 30vh;
 	padding: 32px min(16px, 2vw);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	gap: 32px;
 }
 #signIn-form fieldset{
 	border: none;
@@ -19,7 +20,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	align-content: flex-start;
+	align-items: center;
 }
 #signIn-form fieldset:first-child legend{
 	display: block;
@@ -33,6 +34,8 @@
 	flex-wrap: wrap;
 	gap: 16px;
 	font-size: calc(1em - calc(778px - 100vw) / 128);
+	max-width: 360px;
+	margin-top: 32px;
 }
 #signIn-form fieldset:first-child label input{
 	width: min(512px, 75%);
@@ -83,6 +86,7 @@
 }
 #signIn-form .response{
 	font-size: calc(.8em - calc(778px - 100vw) / 128);
+	padding-block: 16px;
 	width: 100%;
 	display: grid;
 	place-items: center;

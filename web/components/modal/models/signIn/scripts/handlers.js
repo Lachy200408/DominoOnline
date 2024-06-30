@@ -9,15 +9,11 @@ export class Handlers {
 		event.preventDefault()
 	
 		const form = document.querySelector('#signIn-form'),
-					username = form.querySelector('#username').value,
-					password = form.querySelector('#password').value
+					username = form.querySelector('#username').value
 
 		//* Disparar el evento
 		const login = new Event('login', {bubbles: false})
-		login.info = {
-			username,
-			password
-		}
+		login.info = { username }
 		dispatchEvent(login)
 
 		//* Quitar el mensaje de respuesta

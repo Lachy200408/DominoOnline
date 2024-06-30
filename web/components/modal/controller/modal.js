@@ -2,6 +2,7 @@ import { CloseModal } from "./scripts/closeModal.js"
 import { SUpModel } from "../models/signUp/scripts/model.js"
 import { SInModel } from "../models/signIn/scripts/model.js"
 import { AlertModel } from "../models/alert/scripts/model.js"
+import { MPModel } from "../models/multiplayer/scripts/model.js"
 
 class Modal {
 	constructor () {
@@ -19,10 +20,11 @@ class Modal {
 		this.html.append(CloseModal.btn)
 	}
 
-	display (model, message={}) {
+	display ({ model, message={}, connection}) {
 		if (model === 'signUp') return SUpModel.init(this.html, Modal.setListenerCloseModal)
 		if (model === 'signIn') return SInModel.init(this.html, Modal.setListenerCloseModal)
 		if (model === 'alert') return AlertModel.init(this.html, Modal.setListenerCloseModal, message)
+		if (model === 'multiplayer') return MPModel.init(this.html, Modal.setListenerCloseModal, connection)
 	}
 
 	newMessage (model, message={}) {

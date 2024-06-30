@@ -33,6 +33,14 @@ class MainMenu {
 						this.html.querySelector('style').innerHTML = css
 					})
 	}
+
+	userLogedIn ({ username, avatar }) {
+		this.html.querySelector('.user-name').textContent = username
+		this.html.querySelector('.avatar>img').src = avatar.src
+
+		this.html.querySelectorAll('#signIn, #signUp').forEach(btn => btn.classList.add('disabled'))
+		this.html.querySelector('#signOut').classList.remove('disabled')
+	}
 }
 
 export const MenuCore = new MainMenu()

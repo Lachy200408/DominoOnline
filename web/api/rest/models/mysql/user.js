@@ -27,12 +27,17 @@ export class UserModel {
 		}
 	}
 
-	static async insert ({ username, password }) {
+	static async insert ({ username, avatarName }) {
 		try{
-			const [userObj] = await connection.query(
-				'INSERT INTO users (username, password) VALUES (?, ?);',
-				[username, password]
-			)
+			const query = avatarName
+										?'INSERT INTO users (username, avatar) VALUES (?,?);'
+										:'INSERT INTO users (username) VALUES (?);'
+
+			const array = avatarName
+										?[username, avatarName]
+										:[username]
+
+			const [userObj] = await connection.query(query, array)
 
 			return userObj.affectedRows === 1
 		}
@@ -42,11 +47,11 @@ export class UserModel {
 		}
 	}
 
-	static async select ({ username, password }) {
+	static async select ({ username }) {
 		try{
 			const [userObj] = await connection.query(
-				'SELECT username, password FROM users WHERE username=? AND password=?;',
-				[username, password]
+				'SELECT username, avatar FROM users WHERE username=?;',
+				[username]
 			)
 
 			return userObj[0]

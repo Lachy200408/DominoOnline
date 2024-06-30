@@ -22,7 +22,7 @@ body>main>*:not(.modal){
 }
 #close-modal{
 	position: absolute;
-	top: 8px;
+	top: -8px;
 	right: 8px;
 
 	border: none;

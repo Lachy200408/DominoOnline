@@ -1,8 +1,13 @@
 //* Importaciones de modulos
 
+import { UserCore } from "/components/user/controller/user.js"
 import { ConnectionCore } from "/components/connection/controller/connection.js"
 import { MenuCore } from "/components/mainMenu/scripts/mainMenu.js"
 import { ModalCore } from "/components/modal/controller/modal.js"
+
+//* Importaciones de utility functions
+
+import { getResponseMessage } from "./util/responseMessage.js"
 
 //* Nucleo principal
 
@@ -31,6 +36,7 @@ class Handlers {
 
 			"newUser": this.EventFn.newUser,
 			"login": this.EventFn.login,
+			"logOut": this.EventFn.logout
 		}
 
 		return funcs[id]
@@ -38,59 +44,77 @@ class Handlers {
 
 	static MenuFn = {
 		signUp: function () {
-			ModalCore.display('signUp')
+			ModalCore.display({ model: 'signUp' })
 		},
 
 		signIn: function () {
-			ModalCore.display('signIn')
+			ModalCore.display({ model: 'signIn' })
 		},
 
 		singlePlayer: function (event) {
-			ModalCore.display('alert', {
-				type: 'error',
-				text: 'Feature not available'
+			ModalCore.display({
+				model: 'alert',
+				message: {
+					type: 'error',
+					text: 'Feature not available'
+				}
 			})
 		},
 
 		multiPlayer: function (event) {
-			ModalCore.display('alert', {
-				type: 'error',
-				text: 'Feature not available'
-			})
+			if (UserCore.loged) {
+				//* Comenzar el juego
+				ModalCore.display({
+					model: 'multiplayer',
+					connection: ConnectionCore.webSocket()
+				})
+			}
+			else {
+				ModalCore.display({
+					model: 'alert',
+					message: {
+						type: 'error',
+						text: 'You must be signed in first.'
+					}
+				})
+			}
 		}
 	}
 
 	static EventFn = {
 		newUser: async function (event) {
-			const result = await ConnectionCore.post('newUser', {
-				username: event.info.username,
-				password: event.info.password
+			const result = await ConnectionCore.post('newUser', event.info)
+			const { type, text } = getResponseMessage(result, event.info.username, 'signUp')
+			
+			ModalCore.newMessage({ 
+				model: 'signUp',
+				message: { type, text	}
 			})
 
-			const text = (result === 'ok')? 		`The user ${event.info.username} has been successfully registered.` :
-									 (result === 'exists')? `The user ${event.info.username} already exists.` :
-									 												`An unspected error was ocurred. Check your internet connection.`,
-						type = (result === 'ok')? 'ok' : 'error' 
-			
-			return ModalCore.newMessage('signUp', {
-				type: type,
-				text: text
-			})
+			//* Loggear al usuario cuando se registre
+			if (type === 'ok') {
+				const userToPage = UserCore.login(result, ConnectionCore.activeServer)
+				MenuCore.userLogedIn(userToPage)
+			}
 		},
 
 		login: async function (event) {
 			const result = await ConnectionCore.get('login', event.info)
+			const { type, text } = getResponseMessage(result, event.info.username, 'signIn')
 
-			const text = (result.username)? 										`The user ${event.info.username} has been successfully loged in.` :
-									 (result.message.includes('password'))? `The password is incorrect.` :
-									 (result.message.includes('username'))? `The user ${event.info.username} does not exists.` :
-									 																				`An unspected error was ocurred. Check your internet connection.`,
-						type = (result.username)? 'ok' : 'error'
-
-			return ModalCore.newMessage('signIn', {
-				type: type,
-				text: text
+			ModalCore.newMessage({ 
+				model: 'signIn',
+				message: { type, text }
 			})
+
+			if (type === 'ok') {
+				const userToPage = UserCore.login(result, ConnectionCore.activeServer)
+				MenuCore.userLogedIn(userToPage)
+			}
+		},
+
+		logout: function () {
+			UserCore.reset()
 		}
 	}
 }
@@ -99,6 +123,7 @@ class Handlers {
 class Listeners {
 	static set () {
 		window.addEventListener('newUser', Core.getHandler('newUser'), false)
-		window.addEventListener('login', Core.getHandler('login', false))
+		window.addEventListener('login', Core.getHandler('login'), false)
+		window.addEventListener('logOut', Core.getHandler('logOut'), false)
 	}
 }
